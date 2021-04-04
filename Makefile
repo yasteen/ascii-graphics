@@ -12,7 +12,7 @@ run: run.c
 
 
 clean:
-	rm -f $(EXES) $(MAIN)
+	rm -f $(MAIN)
 
 # Don't treat "all" and "clean" as file targets
 .PHONY: all clean
