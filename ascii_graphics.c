@@ -13,16 +13,6 @@ void init_window() {
 	curs_set(0);		// Set invisible cursor
 }
 
-void drawRect(int x, int y, int width, int height, char c) {
-	char * s = malloc(sizeof(char) * (width + 1));
-	for (int i = 0; i < width; i++) s[i] = c;
-	s[width] = '\0';
-	for (int i = 0; i < height; i++) {
-		mvaddstr(y + i, x, s);
-	}
-	free(s);
-}
-
 void drawLine(int x0, int y0, int x1, int y1, char c) {
 	int dx =  abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
 	int dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
@@ -36,6 +26,23 @@ void drawLine(int x0, int y0, int x1, int y1, char c) {
 		if (e2 <= dx) { err += dx; y0 += sy; }
 	}
 }
+
+void drawRect(int x, int y, int width, int height, char c) {
+	drawLine(x, y, x, y + height, c);
+	drawLine(x, y, x + width, y, c);
+	drawLine(x + width, y, x + width, y + height, c);
+	drawLine(x, y + height, x + width, y + height, c);
+}
+void fillRect(int x, int y, int width, int height, char c) {
+	char * s = malloc(sizeof(char) * (width + 1));
+	for (int i = 0; i < width; i++) s[i] = c;
+	s[width] = '\0';
+	for (int i = 0; i < height; i++) {
+		mvaddstr(y + i, x, s);
+	}
+	free(s);
+}
+
 
 void drawTriangle(int x0, int y0, int x1, int y1, int x2, int y2, char c) {
 	drawLine(x0, y0, x1, y1, c);
