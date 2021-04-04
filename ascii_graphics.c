@@ -3,14 +3,11 @@
 #include <stdlib.h>
 #include "slep.h"
 
-static int ROW, COL;
 //static char scale[] = " .:-=+*#%@";	// size 10
-
 
 void init_window() {
 	initscr();
 	clear();
-	getmaxyx(stdscr, ROW, COL);
 	cbreak();		// Input gets immediately sent
 	// noecho();
 	curs_set(0);		// Set invisible cursor
@@ -46,23 +43,23 @@ void drawTriangle(int x0, int y0, int x1, int y1, int x2, int y2, char c) {
 	drawLine(x2, y2, x0, y0, c);
 }
 
-int main() {
-	init_window();
-	int width = 10;
-	int height = 10;
-	int x = 0;
-	int y = (ROW - height) / 2;
-	while (1) {
-		clear();
-		drawRect(x, y, width, height, 'f');
-		drawTriangle(20, 0, 0, 10, 30, 11, 'f');
-		x++;
-		refresh();
-		msleep(1000);
-	}
-
-	// END PROGRAM
-	getch();
-	endwin();
-	return 0;
-}
+//int main() {
+//	init_window();
+//	int width = 10;
+//	int height = 10;
+//	int x = 0;
+//	int y = (ROW - height) / 2;
+//	while (1) {
+//		clear();
+//		drawRect(x, y, width, height, 'f');
+//		drawTriangle(20, 0, 0, 10, 30, 11, 'f');
+//		x++;
+//		refresh();
+//		msleep(1000);
+//	}
+//
+//	// END PROGRAM
+//	getch();
+//	endwin();
+//	return 0;
+//}

@@ -1,17 +1,15 @@
 FLAGS = -Wall -lncurses
 
-EXES = window free
-OBJS = slep
+EXES = run
+OBJS = slep ascii_graphics
 MAIN = main
 
 all: $(EXES)
 
 
-window: window.c
-	gcc window.c slep.c -o main $(FLAGS)
+run: run.c
+	gcc run.c ascii_graphics.c slep.c -o main $(FLAGS)
 
-free: free.c
-	gcc free.c -o free $(FLAGS)
 
 clean:
 	rm -f $(EXES) $(MAIN)
