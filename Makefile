@@ -4,10 +4,10 @@ EXES = run
 OBJS = slep ascii_graphics
 MAIN = main
 
-all: $(EXES)
+all: $(MAIN)
 
 
-run: run.c
+main: run.c
 	gcc run.c ascii_graphics.c slep.c -o main $(FLAGS)
 
 
