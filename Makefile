@@ -8,7 +8,7 @@ all: $(MAIN)
 
 
 main: run.c slep.c ascii_graphics.c
-	gcc run.c ascii_graphics.c slep.c -o main $(FLAGS)
+	gcc run.c ascii_graphics.c slep.c -o main $(FLAGS) -lm
 
 test: test.c ascii_graphics.c
 	gcc test.c ascii_graphics.c -o test $(FLAGS)
