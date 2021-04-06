@@ -8,25 +8,27 @@ int ROW, COL;
 int x = 0;
 int r = 20;
 
+// Runs each iteration
 void run() {
 	fillTriangle(
 		(int) (COL / 2 + r * cos(M_PI * x / 180)),
-		(int) (ROW / 2 + 10 + r * sin(M_PI * x / 180)) / 2,
+		(int) (ROW + r * sin(M_PI * x / 180)) / 2,
 		(int) (COL / 2 + r * cos(M_PI * x / 180 + M_PI * 2 / 3)),
-		(int) (ROW / 2 + 10 + r * sin(M_PI * x / 180 + M_PI * 2 / 3)) / 2,
+		(int) (ROW + r * sin(M_PI * x / 180 + M_PI * 2 / 3)) / 2,
 		(int) (COL / 2 + r * cos(M_PI * x / 180 + M_PI * 4 / 3)),
-		(int) (ROW / 2 + 10 + r * sin(M_PI * x / 180 + M_PI * 4 / 3)) / 2,
+		(int) (ROW + r * sin(M_PI * x / 180 + M_PI * 4 / 3)) / 2,
 		'x');
 }
 
 int main() {
-	init_window();
+	init_window();	// Maybe remove from ascii_graphics.c
 	getmaxyx(stdscr, ROW, COL);
 	// int turn = 100;
 	// while (turn--) {
 	while (1) {
-		clear();
+		erase();
 		run();
+		printw("Row: %d\n", ROW);
 		x++;
 		refresh();
 		msleep(50);
