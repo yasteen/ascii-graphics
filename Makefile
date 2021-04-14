@@ -1,17 +1,17 @@
 FLAGS = -Wall -g -lncurses
 
 EXES = run
-OBJS = slep ascii_graphics
+DEPS = slep.c ascii_graphics.c vecmath.c
 MAIN = main test
 
 all: $(MAIN)
 
 
-main: run.c slep.c ascii_graphics.c
-	gcc run.c ascii_graphics.c slep.c -o main $(FLAGS) -lm
+main: run.c $(DEPS)
+	gcc run.c $(DEPS) -o main $(FLAGS) -lm
 
 test: test.c ascii_graphics.c
-	gcc test.c ascii_graphics.c -o test $(FLAGS)
+	gcc test.c $(DEPS) -o test $(FLAGS)
 
 clean:
 	rm -f $(MAIN)
