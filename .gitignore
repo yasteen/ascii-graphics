@@ -2,3 +2,4 @@ test.c
 test
 run
 .vscode
+*.swp
