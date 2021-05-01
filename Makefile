@@ -3,7 +3,7 @@ FLAGS = -Wall -g -lncurses -lm
 MAIN = main
 OUT = run
 TEST = test
-DEPS = slep.c ascii_graphics.c vecmath.c 
+DEPS = slep.c ascii_graphics.c vecmath.c engine.c
 
 all: $(OUT)
 

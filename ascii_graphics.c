@@ -8,13 +8,6 @@
 
 //static char scale[] = " .:-=+*#%@";	// size 10
 
-void init_window() {
-	initscr();
-	clear();
-	cbreak();		// Input gets immediately sent
-	// noecho();
-	curs_set(0);		// Set invisible cursor
-}
 
 // Bresenham's line algorithm
 // Draws a line from point (x0, y0) to (x1, y1) with char c

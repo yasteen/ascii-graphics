@@ -1,12 +1,17 @@
-#include <ncurses.h>
 #include "slep.h"
 #include "ascii_graphics.h"
+#include "engine.h"
 #include <math.h>
+#include <ncurses.h>
 
 int ROW, COL;
 
 int x = 0;
-int r = 20;
+int r = 30;
+
+void init() {
+	getmaxyx(stdscr, ROW, COL);
+}
 
 // Runs each iteration
 void run() {
@@ -18,22 +23,10 @@ void run() {
 		(int) (COL / 2 + r * cos(M_PI * x / 180 + M_PI * 4 / 3)),
 		(int) (ROW + r * sin(M_PI * x / 180 + M_PI * 4 / 3)) / 2,
 		'x');
+	x++;
 }
 
 int main() {
-	init_window();	// Maybe remove from ascii_graphics.c
-	getmaxyx(stdscr, ROW, COL);
-	// int turn = 100;
-	// while (turn--) {
-	while (1) {
-		erase();
-		run();
-		printw("Row: %d\n", ROW);
-		x++;
-		refresh();
-		msleep(50);
-	}
-	getch();
-	endwin();
+	startEngine(40, init, run);
 	return 0;
 }
