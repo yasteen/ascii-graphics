@@ -7,30 +7,33 @@
 
 // Vectors
 typedef struct vec_t {
-	double * v;
+	float * v;
 	size_t size;
 } vec;
 
 typedef struct vec3_t {
-	double x, y, z;
+	float x, y, z;
 } vec3;
 
 
 // Matrices
 typedef struct mat_t {
-	double ** m;
-	double rows;
-	double cols;
+	float ** m;
+	float rows;
+	float cols;
 } mat;
 
 typedef struct mat4_t {
-	double m[4][4];
+	float m[4][4];
 } mat4;
 
+// Mat4 of zeros
+extern const mat4 mat4z;
+
 // Functions
-double dotprod(vec v1, vec v2);
+float dotprod(vec v1, vec v2);
 vec matvecprod(mat, vec v);
-double mat4prod(mat4 m1, mat4 m2);
+float mat4prod(mat4 m1, mat4 m2);
 vec3 mv3norm(mat4 m, vec3 v);
 
 
