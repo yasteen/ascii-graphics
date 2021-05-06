@@ -1,6 +1,4 @@
-#include "slep.h"
-#include "ascii_graphics.h"
-#include "engine.h"
+#include <asciigraphics.h>
 #include <math.h>
 #include <ncurses.h>
 

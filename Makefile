@@ -1,21 +1,44 @@
-FLAGS = -Wall -g -lncurses -lm
+CC		= gcc
+CFLAGS	= -Wall -g
+LDFLAGS	= -lncurses -lm
+OBJFILES = libasciigraphics.o slep.o graphics2d.o vecmath.o
 
-MAIN = main
-OUT = run
-TEST = test
-DEPS = slep.c ascii_graphics.c vecmath.c engine.c
+# Add extra -fPIC flag to implicit rule
+%.o: %.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) -fPIC $< -o $@ $(LDFLAGS)
 
-all: $(OUT)
+all: $(OBJFILES)
 
+# Create shared file
+libasciigraphics.so: $(OBJFILES)
+	$(CC) $(CFLAGS) -fPIC -shared -o $@ $^ $(LDFLAGS)
 
-run: main.c $(DEPS)
-	gcc main.c $(DEPS) -o run $(FLAGS)
+# file is saved to /usr/lib.
+install: libasciigraphics.so
+	cp libasciigraphics.so /usr/lib
+	cp asciigraphics.h /usr/include
+ifeq (, $(wildcard /usr/include/asciigraphics))
+	mkdir /usr/include/asciigraphics
+endif
+	cp -a asciigraphics/. /usr/include/asciigraphics
 
-test: test.c $(DEPS)
-	gcc test.c $(DEPS) -o test $(FLAGS)
+uninstall:
+ifneq (,$(wildcard /usr/lib/libasciigraphics.so))
+	rm /usr/lib/libasciigraphics.so
+else
+	@echo "The library .so file is not yet installed."
+endif
+ifneq (,$(wildcard /usr/include/asciigraphics.h))
+	rm /usr/include/asciigraphics.h
+else
+	@echo "The library  .h file is not yet installed."
+endif
+ifneq (,$(wildcard /usr/include/asciigraphics))
+	rm -r /usr/include/asciigraphics
+endif
 
 clean:
-	rm -f $(OUT) $(TEST)
+	rm -f *.o *.so
 
-# Don't treat "all" and "clean" as file targets
-.PHONY: all clean
+# Don't treat as file targets
+.PHONY: all clean install uninstall

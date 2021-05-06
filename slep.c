@@ -1,8 +1,8 @@
 #include <time.h>
 #include <errno.h>
 
+#include "asciigraphics/slep.h"
 /* msleep(): Sleep for the requested number of milliseconds. */
-
 int msleep(long msec)
 {
     struct timespec ts;
