@@ -1,4 +1,4 @@
-#include "vecmath.h"
+#include "asciigraphics/vecmath.h"
 #include <stdlib.h>
 #include <stdio.h>
 

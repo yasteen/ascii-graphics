@@ -1,5 +1,5 @@
-#ifndef ASCII_GRAPHICS_H
-#define ASCII_GRAPHICS_H
+#ifndef GRAPHICS2D_H
+#define GRAPHICS2D_H
 
 void fillRect(int x, int y, int width, int height, char c);
 void drawRect(int x, int y, int width, int height, char c);

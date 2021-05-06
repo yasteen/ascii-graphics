@@ -2,9 +2,9 @@
 #include <limits.h>
 #include <string.h>
 #include <stdlib.h>
-#include "slep.h"
-#include "ascii_graphics.h"
 
+#include "asciigraphics/slep.h"
+#include "asciigraphics/graphics2d.h"
 
 //static char scale[] = " .:-=+*#%@";	// size 10
 
