@@ -7,8 +7,8 @@
 
 // Vectors
 typedef struct vec_t {
-	float * v;
 	size_t size;
+	float * v;
 } vec;
 
 typedef struct vec3_t {
@@ -18,9 +18,9 @@ typedef struct vec3_t {
 
 // Matrices
 typedef struct mat_t {
-	float ** m;
 	float rows;
 	float cols;
+	float ** m;
 } mat;
 
 typedef struct mat4_t {

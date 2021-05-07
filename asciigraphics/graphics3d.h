@@ -8,11 +8,11 @@ typedef struct triangle_t {
 } triangle;
 
 typedef struct mesh_t {
-    triangle * tris;
     size_t size;
+    triangle * tris;
 } mesh;
 
-void drawMesh(mesh m, mat4 projmat);
+void drawMesh(mesh m);
 mat4 createProjMat(float near, float far, float fov, float aspratio, float fovrad);
 
 #endif
