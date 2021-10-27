@@ -6,24 +6,27 @@
 // Type definitions
 
 // Vectors
-typedef struct vec_t {
-	float * v;
+typedef struct vec_t
+{
 	size_t size;
+	float *v;
 } vec;
 
-typedef struct vec3_t {
+typedef struct vec3_t
+{
 	float x, y, z;
 } vec3;
 
-
 // Matrices
-typedef struct mat_t {
-	float ** m;
+typedef struct mat_t
+{
 	float rows;
 	float cols;
+	float **m;
 } mat;
 
-typedef struct mat4_t {
+typedef struct mat4_t
+{
 	float m[4][4];
 } mat4;
 
@@ -35,6 +38,5 @@ float dotprod(vec v1, vec v2);
 vec matvecprod(mat, vec v);
 float mat4prod(mat4 m1, mat4 m2);
 vec3 mv3norm(mat4 m, vec3 v);
-
 
 #endif

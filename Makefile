@@ -1,13 +1,14 @@
 CC		= gcc
 CFLAGS	= -Wall -g
 LDFLAGS	= -lncurses -lm
-OBJFILES = libasciigraphics.o slep.o graphics2d.o vecmath.o
+OBJFILES = libasciigraphics.o slep.o vecmath.o graphics2d.o graphics3d.o
+TARGET = libasciigraphics.so
 
 # Add extra -fPIC flag to implicit rule
 %.o: %.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) -fPIC $< -o $@ $(LDFLAGS)
 
-all: $(OBJFILES)
+all: $(OBJFILES) $(TARGET)
 
 # Create shared file
 libasciigraphics.so: $(OBJFILES)

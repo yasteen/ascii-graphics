@@ -34,7 +34,7 @@ vec matvecprod(mat m, vec v) {
 			product[i] += m.m[i][j] * v.v[j];
 		}
 	}
-	vec result = {product, m.rows};
+	vec result = {m.rows, product};
 	return result;
 }
 

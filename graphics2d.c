@@ -27,21 +27,17 @@ void drawLine(int x0, int y0, int x1, int y1, char c) {
 
 // Draws a rectangle starting at x, y, with the given width/height
 void drawRect(int x, int y, int width, int height, char c) {
-	drawLine(x, y, x, y + height, c);
-	drawLine(x, y, x + width, y, c);
-	drawLine(x + width, y, x + width, y + height, c);
-	drawLine(x, y + height, x + width, y + height, c);
+	drawLine(x, y, x, y + height - 1, c);
+	drawLine(x, y, x + width - 1, y, c);
+	drawLine(x + width - 1, y, x + width - 1, y + height - 1, c);
+	drawLine(x, y + height - 1, x + width - 1, y + height - 1, c);
 }
 
 // Fills a rectangle starting at x, y, with the given width/height
 void fillRect(int x, int y, int width, int height, char c) {
-	char * s = malloc(sizeof(char) * (width + 1));
-	for (int i = 0; i < width; i++) s[i] = c;
-	s[width] = '\0';
-	for (int i = 0; i < height; i++) {
-		mvaddstr(y + i, x, s);
-	}
-	free(s);
+	for (int i = 0; i < height; i++)
+		for (int j = 0; j < width; j++)
+			mvaddch(y + i, x + j, c);
 }
 
 // Draws a triangle with vertices at each given point
@@ -99,7 +95,6 @@ void fillTriangle(int x0, int y0, int x1, int y1, int x2, int y2, char c) {
 		swap = x1; x1 = x2; x2 = swap;
 		swap = y1; y1 = y2; y2 = swap;
 	}
-	int width = x2 - x0;
 	int minY = y0 < y1 ? y0 : y1; minY = minY < y2 ? minY : y2;
 
 	// Initialize array to store minX and maxX for each row (+1 for endpoint)
@@ -113,13 +108,11 @@ void fillTriangle(int x0, int y0, int x1, int y1, int x2, int y2, char c) {
 	populateLine(x0, y0, x1, y1, minY, range);
 	populateLine(x1, y1, x2, y2, minY, range);
 	populateLine(x0, y0, x2, y2, minY, range);
-	// + 1 for null terminator + 1 for endpoint
-	char * s = malloc(sizeof(char) * (width + 2));
-	for (int i = 0; i < width + 1; i++) s[i] = c;
-	s[width + 1] = '\0';
+	// + 1 for endpoint
 	for (int i = 0; i <= height; i++) {
-		mvprintw(minY + i, range[0][i], "%.*s", range[1][i]-range[0][i] + 1, s);
+		for (int j = 0; j <= range[1][i] - range[0][i]; j++)
+			mvaddch(minY + i, range[0][i] + j, c);
 	}
-	free(range[0]); free(range[1]); free(s);
+	free(range[0]); free(range[1]);
 
 }
