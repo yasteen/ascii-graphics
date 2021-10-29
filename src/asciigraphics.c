@@ -1,5 +1,5 @@
-#include "asciigraphics/asciigraphics.h"
-#include "asciigraphics/slep.h"
+#include "include/asciigraphics.h"
+#include "include/slep.h"
 #include <ncurses.h>
 
 int end_engine = 0;

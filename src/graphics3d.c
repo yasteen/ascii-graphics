@@ -2,9 +2,9 @@
 #include <math.h>
 #include <ncurses.h>
 
-#include "asciigraphics/graphics3d.h"
-#include "asciigraphics/graphics2d.h"
-#include "asciigraphics/vecmath.h"
+#include "include/graphics3d.h"
+#include "include/graphics2d.h"
+#include "include/vecmath.h"
 
 void drawMesh(mesh m)
 {
