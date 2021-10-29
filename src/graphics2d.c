@@ -3,8 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "asciigraphics/slep.h"
-#include "asciigraphics/graphics2d.h"
+#include "include/slep.h"
+#include "include/graphics2d.h"
 
 //static char scale[] = " .:-=+*#%@";	// size 10
 

@@ -1,6 +1,6 @@
-*.o
-*.so
+build/*
 .vscode
 *.swp
 test/test
 examples/main
+examples/2d-demo
