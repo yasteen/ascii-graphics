@@ -1,4 +1,4 @@
-#include "asciigraphics.h"
+#include "asciigraphics/asciigraphics.h"
 #include "asciigraphics/slep.h"
 #include <ncurses.h>
 

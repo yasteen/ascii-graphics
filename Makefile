@@ -1,45 +1,41 @@
-CC		= gcc
-CFLAGS	= -Wall -g
-LDFLAGS	= -lncurses -lm
-OBJFILES = libasciigraphics.o slep.o vecmath.o graphics2d.o graphics3d.o
-TARGET = libasciigraphics.so
+CC ?= gcc
+CFLAGS ?= -Wall -g
+LDFLAGS ?= -lncurses -lm
 
-# Add extra -fPIC flag to implicit rule
-%.o: %.c
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) -fPIC $< -o $@ $(LDFLAGS)
+BUILD_DIR ?= ./build
+SRC_DIRS ?= ./src
 
-all: $(OBJFILES) $(TARGET)
+TARGET ?= libasciigraphics.so
+SRCS := $(shell find $(SRC_DIRS) -name *.c)
+OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+DEPS := $(OBJS:.o=.d)
 
-# Create shared file
-libasciigraphics.so: $(OBJFILES)
+INC_DIRS := $(shell find $(SRC_DIRS) -type d)
+INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+
+$(BUILD_DIR)/$(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -fPIC -shared -o $@ $^ $(LDFLAGS)
 
-# file is saved to /usr/lib.
-install: libasciigraphics.so
-	cp libasciigraphics.so /usr/lib
-	cp asciigraphics.h /usr/include
-ifeq (, $(wildcard /usr/include/asciigraphics))
-	mkdir /usr/include/asciigraphics
-endif
-	cp -a asciigraphics/. /usr/include/asciigraphics
+# c source
+$(BUILD_DIR)/%.c.o: %.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -fPIC -c $< -o $@ $(LDFLAGS)
+
+install:
+	make
+	mkdir -p /usr/include/asciigraphics
+	cp -r ./src/asciigraphics/* /usr/include/asciigraphics
+	cp $(BUILD_DIR)/libasciigraphics.so /usr/lib
 
 uninstall:
-ifneq (,$(wildcard /usr/lib/libasciigraphics.so))
-	rm /usr/lib/libasciigraphics.so
-else
-	@echo "The library .so file is not yet installed."
-endif
-ifneq (,$(wildcard /usr/include/asciigraphics.h))
-	rm /usr/include/asciigraphics.h
-else
-	@echo "The library  .h file is not yet installed."
-endif
-ifneq (,$(wildcard /usr/include/asciigraphics))
 	rm -r /usr/include/asciigraphics
-endif
+	rm /usr/lib/libasciigraphics.so
+
 
 clean:
-	rm -f *.o *.so
+	$(RM) -r $(BUILD_DIR)
 
-# Don't treat as file targets
-.PHONY: all clean install uninstall
+.PHONY: clean install uninstall
+-include $(DEPS)
+
+
