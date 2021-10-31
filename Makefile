@@ -24,10 +24,12 @@ $(BUILD_DIR)/%.c.o: %.c
 install:
 	make
 	mkdir -p /usr/include/asciigraphics
+	cp ./src/asciigraphics.h /usr/include
 	cp -r ./src/include/* /usr/include/asciigraphics
 	cp $(BUILD_DIR)/libasciigraphics.so /usr/lib
 
 uninstall:
+	rm /usr/include/asciigraphics.h
 	rm -r /usr/include/asciigraphics
 	rm /usr/lib/libasciigraphics.so
 

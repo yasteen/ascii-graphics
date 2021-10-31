@@ -21,6 +21,14 @@ float dotprod(vec v1, vec v2) {
 	return product;
 }
 
+vec3 crossprod(vec3 v1, vec3 v2) {
+    float x = v1.y * v2.z - v2.y * v1.z;
+    float y = v2.x * v1.z - v1.x * v2.z;
+    float z = v1.x * v2.y - v2.x * v1.y;
+    vec3 result = {x, y, z};
+    return result;
+}
+
 // Multiplies a matrix with a vector
 vec matvecprod(mat m, vec v) {
 	if (m.cols != v.size) {
@@ -52,4 +60,5 @@ vec3 mv3norm(mat4 m, vec3 v) {
 	if (w != 0.0f) { ans.x /= w; ans.y /= w; ans.z /= w; }
 	return ans;
 }
+
 
