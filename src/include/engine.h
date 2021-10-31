@@ -1,5 +1,5 @@
-#ifndef ASCIIGRAPHICS_H
-#define ASCIIGRAPHICS_H
+#ifndef ENGINE_H 
+#define ENGINE_H
 
 #include "vecmath.h"
 #include "graphics2d.h"
