@@ -17,7 +17,7 @@ typedef struct mesh_t
     triangle *tris;
 } mesh;
 
-void drawMesh(mesh m);
-mat4 createProjMat(float near, float far, float fov, float aspratio, float fovrad);
+void draw_mesh(mesh m);
+mat4 create_proj_mat(float near, float far, float fov, float aspratio, float fovrad);
 
 #endif

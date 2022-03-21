@@ -6,7 +6,7 @@
 #include "include/graphics2d.h"
 #include "include/vecmath.h"
 
-void drawMesh(mesh m)
+void draw_mesh(mesh m)
 {
 	int row, col;
 	getmaxyx(stdscr, row, col);
@@ -14,7 +14,7 @@ void drawMesh(mesh m)
 	float c = col;
 
 	float fov = 45.0;
-	mat4 matProj = createProjMat(0.1, 1000.0, fov, r / c * 2, 1.0 / tanf(fov * 0.5 / 180.0 * M_PI));
+	mat4 matProj = create_proj_mat(0.1, 1000.0, fov, r / c * 2, 1.0 / tanf(fov * 0.5 / 180.0 * M_PI));
 
 	for (int i = 0; i < m.size; i++)
 	{
@@ -25,9 +25,9 @@ void drawMesh(mesh m)
 		m.tris[i].p[2].z += 3.0;
 
 		// Project
-		vec3 p0 = mv3norm(matProj, m.tris[i].p[0]);
-		vec3 p1 = mv3norm(matProj, m.tris[i].p[1]);
-		vec3 p2 = mv3norm(matProj, m.tris[i].p[2]);
+		vec3 p0 = mat_vec3_norm(matProj, m.tris[i].p[0]);
+		vec3 p1 = mat_vec3_norm(matProj, m.tris[i].p[1]);
+		vec3 p2 = mat_vec3_norm(matProj, m.tris[i].p[2]);
 
 		// Scale into view
 		p0.x = (p0.x + 1) * 0.5 * c;
@@ -37,11 +37,11 @@ void drawMesh(mesh m)
 		p2.x = (p2.x + 1) * 0.5 * c;
 		p2.y = (p2.y + 1) * 0.5 * r;
 
-		drawTriangle(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, 'X');
+		draw_triangle(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, 'X');
 	}
 }
 
-mat4 createProjMat(float near, float far, float fov, float aspratio, float fovrad)
+mat4 create_proj_mat(float near, float far, float fov, float aspratio, float fovrad)
 {
 	mvprintw(0, 0, "near: %f, far: %f, fov: %f, aspratio: %f, fovrad: %f", near, far, fov, aspratio, fovrad);
 	mat4 projmat = mat4z;
