@@ -2,18 +2,20 @@
 #include "include/slep.h"
 #include <ncurses.h>
 
-int end_engine = 0;
+int is_engine_ended = 0;
 
 // Starts the graphics engine
-// Note that this function runs until endEngine();
-void startEngine(int sleepms, void (*init)(), void (*update)()) {
+// Note that this function runs until end_engine();
+void start_engine(int sleepms, void (*init)(), void (*update)())
+{
     initscr();
     clear();
-    cbreak();   // Input gets immediately sent
+    cbreak(); // Input gets immediately sent
     // noecho();
     curs_set(0);
     init();
-    while (!end_engine) {
+    while (!is_engine_ended)
+    {
         erase();
         update();
         refresh();
@@ -24,6 +26,7 @@ void startEngine(int sleepms, void (*init)(), void (*update)()) {
 }
 
 // Ends the engine at the end of the current loop
-void endEngine() {
-    end_engine = 1;
+void end_engine()
+{
+    is_engine_ended = 1;
 }

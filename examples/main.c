@@ -61,16 +61,16 @@ void run()
 
 	for (int i = 0; i < m.size; i++)
 	{
-		m.tris[i].p[0] = mv3norm(matRotZ, m.tris[i].p[0]);
-		m.tris[i].p[1] = mv3norm(matRotZ, m.tris[i].p[1]);
-		m.tris[i].p[2] = mv3norm(matRotZ, m.tris[i].p[2]);
+		m.tris[i].p[0] = mat_vec3_norm(matRotZ, m.tris[i].p[0]);
+		m.tris[i].p[1] = mat_vec3_norm(matRotZ, m.tris[i].p[1]);
+		m.tris[i].p[2] = mat_vec3_norm(matRotZ, m.tris[i].p[2]);
 
-		m.tris[i].p[0] = mv3norm(matRotX, m.tris[i].p[0]);
-		m.tris[i].p[1] = mv3norm(matRotX, m.tris[i].p[1]);
-		m.tris[i].p[2] = mv3norm(matRotX, m.tris[i].p[2]);
+		m.tris[i].p[0] = mat_vec3_norm(matRotX, m.tris[i].p[0]);
+		m.tris[i].p[1] = mat_vec3_norm(matRotX, m.tris[i].p[1]);
+		m.tris[i].p[2] = mat_vec3_norm(matRotX, m.tris[i].p[2]);
 	}
 
-	drawMesh(m);
+	draw_mesh(m);
 	// fillTriangle(
 	// 	(int) (COL / 2 + r * cos(M_PI * x / 180)),
 	// 	(int) (ROW + r * sin(M_PI * x / 180)) / 2,
@@ -84,6 +84,6 @@ void run()
 
 int main()
 {
-	startEngine(50, init, run);
+	start_engine(50, init, run);
 	return 0;
 }
