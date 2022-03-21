@@ -7,7 +7,7 @@ SRC_DIRS ?= ./src
 
 TARGET ?= libasciigraphics.so
 SRCS := $(shell find $(SRC_DIRS) -name *.c)
-OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+OBJS := $(SRCS:%.c=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
@@ -17,7 +17,7 @@ $(BUILD_DIR)/$(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -fPIC -shared -o $@ $^ $(LDFLAGS)
 
 # c source
-$(BUILD_DIR)/%.c.o: %.c
+$(BUILD_DIR)/%.o: %.c
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -fPIC -c $< -o $@ $(LDFLAGS)
 
