@@ -1,7 +1,6 @@
 # ascii-graphics
 
 Ascii-graphics is a 2D ascii graphics engine on the terminal.
-3D features are currently being worked on.
 
 ## To use:
 
